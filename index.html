@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSP Murti and Mandir | Divine Marble Art & Home Temples</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        divine: {
+                            900: '#121215',
+                            800: '#1a1a20',
+                            700: '#262630',
+                            600: '#383845',
+                            gold: '#D4AF37',
+                            'gold-light': '#F3E5AB',
+                            'gold-dark': '#AA7C11',
+                            ivory: '#F9F6F0'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121215;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #383845;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA7C11 100%);
+        }
+        .glass-card {
+            background: rgba(26, 26, 32, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        .hero-bg {
+            background: linear-gradient(to bottom, rgba(18,18,21,0.6), rgba(18,18,21,0.95)), url('https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .floating-pulse {
+            animation: pulse-ring 2.5s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-divine-900 text-divine-ivory font-sans antialiased selection:bg-divine-gold selection:text-black">
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-divine-900/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-divine-gold flex items-center justify-center bg-divine-800 text-divine-gold font-serif font-bold text-xl group-hover:bg-divine-gold group-hover:text-black transition duration-300 shadow-lg">
+                    JSP
+                </div>
+                <div>
+                    <span class="text-lg sm:text-xl font-serif font-bold tracking-wider text-white">JSP MURTI & MANDIR</span>
+                    <span class="block text-[9px] tracking-widest text-divine-gold uppercase">Exquisite Marble Art & Divine Sanctuaries</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                <a href="#about" class="hover:text-divine-gold transition duration-200">About Us</a>
+                <a href="#products" class="hover:text-divine-gold transition duration-200">Collection</a>
+                <a href="#gallery" class="hover:text-divine-gold transition duration-200">Gallery</a>
+                <a href="#why-us" class="hover:text-divine-gold transition duration-200">Why Us</a>
+                <a href="#testimonials" class="hover:text-divine-gold transition duration-200">Testimonials</a>
+                <a href="#faq" class="hover:text-divine-gold transition duration-200">FAQ</a>
+                <a href="#contact" class="hover:text-divine-gold transition duration-200">Contact</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center space-x-4">
+                <a href="tel:8799581420" class="px-5 py-2.5 rounded-full border border-divine-gold text-divine-gold text-xs font-semibold tracking-widest uppercase hover:bg-divine-gold hover:text-black transition duration-300 shadow-md">
+                    <i class="fa-solid fa-phone mr-2"></i> +91 87995 81420
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-toggle" class="md:hidden text-2xl text-divine-gold focus:outline-none p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-divine-900 border-b border-white/10 px-6 py-6 space-y-4 shadow-2xl">
+            <a href="#about" class="block text-lg hover:text-divine-gold mobile-nav-link">About Us</a>
+            <a href="#products" class="block text-lg hover:text-divine-gold mobile-nav-link">Collection</a>
+            <a href="#gallery" class="block text-lg hover:text-divine-gold mobile-nav-link">Gallery</a>
+            <a href="#why-us" class="block text-lg hover:text-divine-gold mobile-nav-link">Why Us</a>
+            <a href="#testimonials" class="block text-lg hover:text-divine-gold mobile-nav-link">Testimonials</a>
+            <a href="#faq" class="block text-lg hover:text-divine-gold mobile-nav-link">FAQ</a>
+            <a href="#contact" class="block text-lg hover:text-divine-gold mobile-nav-link">Contact</a>
+            <div class="pt-4 border-t border-white/10">
+                <a href="tel:8799581420" class="w-full block text-center py-3 rounded-xl bg-divine-gold text-black font-bold uppercase tracking-wider text-xs shadow-lg">
+                    <i class="fa-solid fa-phone mr-2"></i> Call: +91 87995 81420
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative min-h-screen flex items-center justify-center hero-bg pt-20">
+        <div class="absolute inset-0 bg-black/65"></div>
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 py-24">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-divine-800/90 border border-divine-gold/40 text-divine-gold text-xs font-semibold tracking-widest uppercase mb-8 shadow-2xl">
+                <i class="fa-solid fa-om"></i> Handcrafted Masterpieces • Pure White Marble
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight leading-tight mb-6">
+                Divine Artistry in <span class="gold-gradient-text">Marble & Mandirs</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed mb-10">
+                Imbue your sacred spaces with tranquility and elegance. We specialize in masterfully sculpted marble murtis, home temples, tulsi pots, handcrafted stone fountains, and fine utensils.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#products" class="w-full sm:w-auto px-8 py-4 rounded-full gold-gradient-bg text-black font-bold text-sm tracking-wider uppercase shadow-xl hover:opacity-90 transition duration-300">
+                    Explore Collection
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full border border-white/30 text-white font-semibold text-sm tracking-wider uppercase hover:bg-white hover:text-black transition duration-300">
+                    Custom Order Inquiry
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-12 border-t border-white/10 text-center">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-3xl sm:text-4xl font-serif font-bold text-divine-gold mb-1">15+</h3>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest">Years of Craft</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-3xl sm:text-4xl font-serif font-bold text-divine-gold mb-1">5000+</h3>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest">Murtis Sculpted</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-3xl sm:text-4xl font-serif font-bold text-divine-gold mb-1">100%</h3>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest">Pure Marble</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-3xl sm:text-4xl font-serif font-bold text-divine-gold mb-1">5 ★</h3>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest">Devotee Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-divine-800 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden border border-divine-gold/30 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?auto=format&fit=crop&w=1000&q=80" alt="JSP Murti and Mandir Craftsmanship" class="w-full h-[520px] object-cover hover:scale-105 transition duration-700">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-divine-gold/10 rounded-full blur-3xl -z-0"></div>
+                </div>
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase px-3 py-1 bg-divine-700 rounded-full border border-divine-gold/20">Legacy of Devotion</span>
+                    <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white leading-tight">
+                        Shaping Divine Sculptures with Precision & Soul
+                    </h2>
+                    <p class="text-gray-300 font-light leading-relaxed">
+                        At <strong class="text-white font-medium">JSP Murti and Mandir</strong>, we honor ancient sculptural traditions while blending contemporary aesthetic perfection. Every block of high-grade marble is hand-picked for purity, texture, and durability.
+                    </p>
+                    <p class="text-gray-300 font-light leading-relaxed">
+                        Our master artisans pour their lifelong dedication into carving serene facial expressions, intricate ornaments, and flawless structures for temples, homes, and divine sanctuaries worldwide.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 pt-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-divine-gold/20 flex items-center justify-center text-divine-gold flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">Hand-Carved Detail</h4>
+                                <p class="text-xs text-gray-400 mt-1">Intricate chiseling by master artisans.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-divine-gold/20 flex items-center justify-center text-divine-gold flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">Custom Dimensions</h4>
+                                <p class="text-xs text-gray-400 mt-1">Tailored murtis and mandirs for your space.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="py-24 bg-divine-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase px-3 py-1 bg-divine-800 rounded-full border border-divine-gold/20">Divine Catalogue</span>
+                    <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mt-4">Our Exquisite Collections</h2>
+                </div>
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
+                    <button class="prod-filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-divine-gold text-black transition duration-300" data-category="all">All Items</button>
+                    <button class="prod-filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-divine-800 text-gray-300 hover:bg-divine-700 transition duration-300" data-category="murti">Marble Murti</button>
+                    <button class="prod-filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-divine-800 text-gray-300 hover:bg-divine-700 transition duration-300" data-category="mandir">Mandir</button>
+                    <button class="prod-filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-divine-800 text-gray-300 hover:bg-divine-700 transition duration-300" data-category="decor">Tulsi Pot & Fountains</button>
+                    <button class="prod-filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-divine-800 text-gray-300 hover:bg-divine-700 transition duration-300" data-category="utensils">Kitchen Utensils</button>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card group relative rounded-2xl overflow-hidden glass-card transition duration-300 hover:-translate-y-2" data-category="murti">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80" alt="White Marble Radha Krishna Murti" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-divine-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 right-4 bg-divine-gold text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">Marble Murti</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-white mb-2">Divinely Sculpted Radha Krishna</h3>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-4">Pure Makrana white marble with subtle gold leaf ornamentation and hand-painted expression.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase">Custom Sizes Available</span>
+                            <a href="https://wa.me/918799581420?text=Hello%20JSP%20Murti%20and%20Mandir,%20I%20want%20to%20inquire%20about%20the%20Radha%20Krishna%20Murti." target="_blank" class="px-4 py-2 rounded-xl gold-gradient-bg text-black font-bold text-xs uppercase tracking-wider shadow hover:opacity-90 transition">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Inquire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card group relative rounded-2xl overflow-hidden glass-card transition duration-300 hover:-translate-y-2" data-category="mandir">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="Home Mandir Temple" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-divine-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 right-4 bg-divine-gold text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">Home Mandir</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-white mb-2">Grand Carved Marble Home Mandir</h3>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-4">Exquisite jali work, integrated LED backlighting, and spacious Sanctum Sanctorum for home puja.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase">Custom Dimensions Available</span>
+                            <a href="https://wa.me/918799581420?text=Hello%20JSP%20Murti%20and%20Mandir,%20I%20want%20to%20inquire%20about%20the%20Marble%20Home%20Mandir." target="_blank" class="px-4 py-2 rounded-xl gold-gradient-bg text-black font-bold text-xs uppercase tracking-wider shadow hover:opacity-90 transition">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Inquire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card group relative rounded-2xl overflow-hidden glass-card transition duration-300 hover:-translate-y-2" data-category="decor">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80" alt="Marble Tulsi Pot" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-divine-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 right-4 bg-divine-gold text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">Tulsi Pot</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-white mb-2">Sacred Marble Tulsi Vridavan</h3>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-4">Weather-resistant premium white marble Tulsi pot with traditional carvings and auspicious motifs.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase">Weather Resistant</span>
+                            <a href="https://wa.me/918799581420?text=Hello%20JSP%20Murti%20and%20Mandir,%20I%20want%20to%20inquire%20about%20the%20Marble%20Tulsi%20Pot." target="_blank" class="px-4 py-2 rounded-xl gold-gradient-bg text-black font-bold text-xs uppercase tracking-wider shadow hover:opacity-90 transition">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Inquire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card group relative rounded-2xl overflow-hidden glass-card transition duration-300 hover:-translate-y-2" data-category="decor">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" alt="Stone Fountain" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-divine-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 right-4 bg-divine-gold text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">Fountain</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-white mb-2">Designer Marble Water Fountain</h3>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-4">Serene cascading water fountain crafted from solid marble, perfect for gardens, living rooms, and office lobbies.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase">Pump Included</span>
+                            <a href="https://wa.me/918799581420?text=Hello%20JSP%20Murti%20and%20Mandir,%20I%20want%20to%20inquire%20about%20the%20Marble%20Fountain." target="_blank" class="px-4 py-2 rounded-xl gold-gradient-bg text-black font-bold text-xs uppercase tracking-wider shadow hover:opacity-90 transition">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Inquire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card group relative rounded-2xl overflow-hidden glass-card transition duration-300 hover:-translate-y-2" data-category="utensils">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=800&q=80" alt="Kitchen Utensils" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-divine-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 right-4 bg-divine-gold text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">Kitchen Utensils</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-white mb-2">Handcrafted Marble Mortar & Pestle</h3>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-4">Traditional heavy-duty marble Okhli and Musal for spice grinding, plus beautiful marble spice jars and trays.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase">Food Grade Marble</span>
+                            <a href="https://wa.me/918799581420?text=Hello%20JSP%20Murti%20and%20Mandir,%20I%20want%20to%20inquire%20about%20Marble%20Kitchen%20Utensils." target="_blank" class="px-4 py-2 rounded-xl gold-gradient-bg text-black font-bold text-xs uppercase tracking-wider shadow hover:opacity-90 transition">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Inquire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card group relative rounded-2xl overflow-hidden glass-card transition duration-300 hover:-translate-y-2" data-category="murti">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1609137144813-772c6734c938?auto=format&fit=crop&w=800&q=80" alt="Ganesha Murti" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-divine-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 right-4 bg-divine-gold text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">Marble Murti</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-white mb-2">Auspicious Lord Ganesha Murti</h3>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-4">Finely sculpted Ganesha idol adorned with vibrant gold embellishments and rich traditional posture.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase">Custom Sizes Available</span>
+                            <a href="https://wa.me/918799581420?text=Hello%20JSP%20Murti%20and%20Mandir,%20I%20want%20to%20inquire%20about%20the%20Ganesha%20Murti." target="_blank" class="px-4 py-2 rounded-xl gold-gradient-bg text-black font-bold text-xs uppercase tracking-wider shadow hover:opacity-90 transition">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Inquire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 bg-divine-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase px-3 py-1 bg-divine-700 rounded-full border border-divine-gold/20">Visual Showcase</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mt-4 mb-4">Glimpses of Our Masterworks</h2>
+                <p class="text-gray-400 font-light">Explore finished installations of home temples, grand murtis, and artisan craftsmanship.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group relative rounded-2xl overflow-hidden glass-card cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80', 'Custom Home Mandir Installation', 'JSP Murti & Mandir Studio Showcase')">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="Gallery 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-divine-900 via-transparent to-transparent opacity-75"></div>
+                    </div>
+                    <div class="p-6 absolute bottom-0 left-0 right-0 z-10">
+                        <span class="text-divine-gold text-xs font-semibold uppercase tracking-widest">Mandir Setup</span>
+                        <h3 class="text-xl font-serif font-bold text-white mt-1">Carved Temple Sanctum</h3>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden glass-card cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=80', 'Makrana Marble Sculpture', 'JSP Murti & Mandir Studio Showcase')">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80" alt="Gallery 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-divine-900 via-transparent to-transparent opacity-75"></div>
+                    </div>
+                    <div class="p-6 absolute bottom-0 left-0 right-0 z-10">
+                        <span class="text-divine-gold text-xs font-semibold uppercase tracking-widest">Murti Art</span>
+                        <h3 class="text-xl font-serif font-bold text-white mt-1">Divine Expression Details</h3>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden glass-card cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80', 'Marble Water Fountain', 'JSP Murti & Mandir Studio Showcase')">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" alt="Gallery 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-divine-900 via-transparent to-transparent opacity-75"></div>
+                    </div>
+                    <div class="p-6 absolute bottom-0 left-0 right-0 z-10">
+                        <span class="text-divine-gold text-xs font-semibold uppercase tracking-widest">Stone Fountains</span>
+                        <h3 class="text-xl font-serif font-bold text-white mt-1">Peaceful Garden Cascade</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us" class="py-24 bg-divine-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase px-3 py-1 bg-divine-800 rounded-full border border-divine-gold/20">The JSP Advantage</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mt-4 mb-4">Why Devotees Trust Us</h2>
+                <p class="text-gray-400 font-light">We combine uncompromising material purity with master artisan dedication.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-divine-gold/10 flex items-center justify-center text-divine-gold text-2xl mb-6">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-white mb-3">Pure White Marble</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed">
+                        Sourced directly from premium quarries, ensuring lasting shine, smooth texture, and sacred resonance.
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-divine-gold/10 flex items-center justify-center text-divine-gold text-2xl mb-6">
+                        <i class="fa-solid fa-hands-praying"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-white mb-3">Master Artisans</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed">
+                        Generations of sculptural heritage poured into every chisel stroke, capturing divine proportions and grace.
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-divine-gold/10 flex items-center justify-center text-divine-gold text-2xl mb-6">
+                        <i class="fa-solid fa-box-archive"></i>
+                    </div>
+                    <h3 class="text-xl fragile-shipping font-serif font-bold text-white mb-3">Safe Worldwide Delivery</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed">
+                        Specialized wooden crating and insured transit guarantee your divine artwork arrives in pristine condition.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 bg-divine-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase px-3 py-1 bg-divine-700 rounded-full border border-divine-gold/20">Devotee Reviews</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mt-4 mb-4">Words From Our Patrons</h2>
+                <p class="text-gray-400 font-light">Read how our murtis and mandirs brought divine serenity to homes.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-divine-gold mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed italic mb-6">
+                            "We ordered a custom 3-foot white marble Radha Krishna murti from JSP Murti and Mandir. The facial finish and detailing are so lifelike and peaceful. Truly blessed by their craftsmanship!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-white/10">
+                        <div class="w-12 h-12 rounded-full bg-divine-gold/20 flex items-center justify-center text-divine-gold font-serif font-bold text-lg">
+                            AS
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Aditya Sharma</h4>
+                            <p class="text-xs text-divine-gold">Patron, Jaipur</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-divine-gold mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed italic mb-6">
+                            "The home mandir we purchased is a work of art. The jali work and lighting setup transformed our living room into a divine temple. Thank you JSP team for safe delivery!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-white/10">
+                        <div class="w-12 h-12 rounded-full bg-divine-gold/20 flex items-center justify-center text-divine-gold font-serif font-bold text-lg">
+                            MK
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Meenakshi Kulkarni</h4>
+                            <p class="text-xs text-divine-gold">Patron, Pune</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-divine-gold mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed italic mb-6">
+                            "Their marble Tulsi pot and kitchen mortar-pestle set are exceptionally heavy and authentic. Outstanding quality marble and very polite customer service on WhatsApp."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-white/10">
+                        <div class="w-12 h-12 rounded-full bg-divine-gold/20 flex items-center justify-center text-divine-gold font-serif font-bold text-lg">
+                            RP
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Rajesh Patel</h4>
+                            <p class="text-xs text-divine-gold">Patron, Ahmedabad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 bg-divine-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase px-3 py-1 bg-divine-800 rounded-full border border-divine-gold/20">Common Queries</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mt-4 mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-400 font-light">Everything you need to know about ordering our marble murtis and mandirs.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full p-6 text-left flex justify-between items-center font-serif font-bold text-lg text-white hover:text-divine-gold transition duration-200">
+                        <span>Can I order a custom size murti or home mandir?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300 text-divine-gold"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-gray-300 text-sm font-light leading-relaxed">
+                        Yes! We specialize in custom dimensions. Share your exact measurements or design preferences via WhatsApp (+91 8799581420), and our master artisans will carve it to perfection.
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full p-6 text-left flex justify-between items-center font-serif font-bold text-lg text-white hover:text-divine-gold transition duration-200">
+                        <span>What type of marble is used in your products?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300 text-divine-gold"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-gray-300 text-sm font-light leading-relaxed">
+                        We use pure Makrana white marble and premium grade Indian marble known for its pristine whiteness, longevity, and divine texture.
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full p-6 text-left flex justify-between items-center font-serif font-bold text-lg text-white hover:text-divine-gold transition duration-200">
+                        <span>How is fragile marble shipped safely?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300 text-divine-gold"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-gray-300 text-sm font-light leading-relaxed">
+                        Every idol and mandir is securely packed with multi-layer bubble wrap, foam molding, and custom heavy-duty wooden crating with 100% transit insurance.
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full p-6 text-left flex justify-between items-center font-serif font-bold text-lg text-white hover:text-divine-gold transition duration-200">
+                        <span>How can I place an order or get price quotes?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300 text-divine-gold"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-gray-300 text-sm font-light leading-relaxed">
+                        You can instantly connect with us by tapping the WhatsApp floating button, calling us directly at +91 87995 81420, or filling out our inquiry form below.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-divine-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-divine-gold text-xs font-semibold tracking-widest uppercase px-3 py-1 bg-divine-700 rounded-full border border-divine-gold/20">Connect With Us</span>
+                    <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white">Let's Bring Divinity Home</h2>
+                    <p class="text-gray-300 font-light leading-relaxed">
+                        Have a custom requirement or wish to discuss a sacred sculpture? Reach out to JSP Murti and Mandir today.
+                    </p>
+
+                    <div class="space-y-6 pt-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-divine-gold/10 flex items-center justify-center text-divine-gold text-xl flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Call / WhatsApp Us</h4>
+                                <a href="tel:8799581420" class="text-divine-gold hover:underline font-medium">+91 87995 81420</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-divine-gold/10 flex items-center justify-center text-divine-gold text-xl flex-shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Email Address</h4>
+                                <a href="mailto:contact@jspmurtimandir.com" class="text-gray-300 hover:text-divine-gold transition duration-200">contact@jspmurtimandir.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-divine-gold/10 flex items-center justify-center text-divine-gold text-xl flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Studio Location</h4>
+                                <p class="text-gray-300 text-sm">Marble Sculpting Hub, India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="glass-card p-8 sm:p-12 rounded-2xl shadow-2xl border border-divine-gold/20">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-6">Send Inquiry</h3>
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Your Name</label>
+                                    <input type="text" id="name" required class="w-full bg-divine-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-divine-gold transition duration-200" placeholder="Aditya Sharma">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Phone Number</label>
+                                    <input type="tel" id="phone" required class="w-full bg-divine-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-divine-gold transition duration-200" placeholder="+91 98765 43210">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Product Category</label>
+                                <select id="product-category" class="w-full bg-divine-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-divine-gold transition duration-200">
+                                    <option>Marble Murti (Radha Krishna, Ganesha, etc.)</option>
+                                    <option>Home Mandir (Temple)</option>
+                                    <option>Tulsi Pot / Vridavan</option>
+                                    <option>Stone Water Fountain</option>
+                                    <option>Kitchen Utensils (Mortar, Jars, etc.)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Your Requirements & Size</label>
+                                <textarea id="message" rows="4" required class="w-full bg-divine-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-divine-gold transition duration-200" placeholder="Please mention preferred size, design details, or city for delivery..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-4 rounded-xl gold-gradient-bg text-black font-bold uppercase tracking-wider text-sm shadow-xl hover:opacity-90 transition duration-300">
+                                Submit Inquiry
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-divine-950 border-t border-white/10 py-16 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full border border-divine-gold flex items-center justify-center bg-divine-800 text-divine-gold font-serif font-bold text-xl">
+                            JSP
+                        </div>
+                        <span class="text-xl font-serif font-bold text-white tracking-wider">JSP MURTI & MANDIR</span>
+                    </div>
+                    <p class="text-gray-400 max-w-md font-light">
+                        Exquisite marble murtis, home temples, tulsi pots, stone fountains, and kitchen utensils crafted with divine devotion and master expertise.
+                    </p>
+                    <div class="flex items-center space-x-4 pt-2">
+                        <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-divine-800 border border-white/10 flex items-center justify-center text-divine-gold hover:bg-divine-gold hover:text-black transition duration-300" title="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" class="w-10 h-10 rounded-full bg-divine-800 border border-white/10 flex items-center justify-center text-divine-gold hover:bg-divine-gold hover:text-black transition duration-300" title="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://pinterest.com" target="_blank" class="w-10 h-10 rounded-full bg-divine-800 border border-white/10 flex items-center justify-center text-divine-gold hover:bg-divine-gold hover:text-black transition duration-300" title="Pinterest">
+                            <i class="fa-brands fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-serif font-bold text-base mb-4 tracking-wider">Quick Links</h4>
+                    <ul class="space-y-2 font-light">
+                        <li><a href="#about" class="hover:text-divine-gold transition duration-200">About Us</a></li>
+                        <li><a href="#products" class="hover:text-divine-gold transition duration-200">Collection</a></li>
+                        <li><a href="#gallery" class="hover:text-divine-gold transition duration-200">Gallery</a></li>
+                        <li><a href="#why-us" class="hover:text-divine-gold transition duration-200">Why Choose Us</a></li>
+                        <li><a href="#contact" class="hover:text-divine-gold transition duration-200">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-serif font-bold text-base mb-4 tracking-wider">Contact Info</h4>
+                    <ul class="space-y-3 font-light">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-divine-gold"></i>
+                            <a href="tel:8799581420" class="hover:text-divine-gold">+91 87995 81420</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-brands fa-instagram text-divine-gold"></i>
+                            <a href="https://instagram.com" target="_blank" class="hover:text-divine-gold">@jspmurtimandir</a>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-divine-gold mt-1"></i>
+                            <span>Marble Sculpting Hub, India</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 font-light">
+                <p>&copy; 2026 JSP Murti and Mandir. All rights reserved.</p>
+                <p class="mt-4 sm:mt-0">✨ Handcrafted Marble Artistry</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp and Call Buttons -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+        <a href="https://wa.me/918799581420?text=Hello%20JSP%20Murti%20and%20Mandir,%20I%20would%20like%20to%20inquire%20about%20your%20marble%20artifacts." target="_blank" class="relative group w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center text-2xl shadow-2xl hover:scale-110 transition duration-300" title="Chat on WhatsApp">
+            <span class="absolute -inset-1 rounded-full bg-emerald-400 opacity-75 floating-pulse -z-10"></span>
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:8799581420" class="relative group w-14 h-14 rounded-full gold-gradient-bg text-black flex items-center justify-center text-xl shadow-2xl hover:scale-110 transition duration-300" title="Call Us">
+            <span class="absolute -inset-1 rounded-full bg-divine-gold opacity-50 floating-pulse -z-10"></span>
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-divine-gold p-2">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl w-full text-center">
+            <img id="lightbox-img" src="" alt="Artifact Preview" class="max-h-[75vh] mx-auto rounded-xl border border-divine-gold/30 shadow-2xl mb-4">
+            <h3 id="lightbox-title" class="text-2xl font-serif font-bold text-white"></h3>
+            <p id="lightbox-desc" class="text-sm text-divine-gold mt-1"></p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Product Filtering
+        const prodFilterBtns = document.querySelectorAll('.prod-filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        prodFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                prodFilterBtns.forEach(b => {
+                    b.classList.remove('bg-divine-gold', 'text-black');
+                    b.classList.add('bg-divine-800', 'text-gray-300');
+                });
+                btn.classList.remove('bg-divine-800', 'text-gray-300');
+                btn.classList.add('bg-divine-gold', 'text-black');
+
+                const filter = btn.getAttribute('data-category');
+                productCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Lightbox Functions
+        function openLightbox(src, title, desc) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const titleEl = document.getElementById('lightbox-title');
+            const descEl = document.getElementById('lightbox-desc');
+
+            img.src = src;
+            titleEl.textContent = title;
+            descEl.textContent = desc;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // FAQ Accordion
+        const faqBtns = document.querySelectorAll('.faq-btn');
+        faqBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                content.classList.toggle('hidden');
+                btn.classList.toggle('text-divine-gold');
+            });
+        });
+
+        // Contact Form Submission Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-divine-gold text-black px-6 py-3 rounded-full font-bold shadow-2xl z-50 transition duration-300 text-center';
+            toast.textContent = `Thank you ${name}! JSP Murti and Mandir team will call you at ${phone} shortly.`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+                document.getElementById('contact-form').reset();
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
